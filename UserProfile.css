@@ -1,0 +1,49 @@
+/*Script Code below is for Sidebar*/
+.sidenav {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #3700B3;
+  overflow-x: hidden;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/*Below Code is for Cards*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 60%;
+ margin-left: 30%;
+padding-left: 5%;
+	height: 500px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0.8,0,0,0.8);
+}
+.container {
+  padding: 2px 16px;
+}

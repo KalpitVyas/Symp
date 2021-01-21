@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Welcome!</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--3 links below are Bootstrap CDN-->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<!-- Including the UserProfile.css -->
+		<link href = "UserProfile.css" type = "text/css" rel="stylesheet"> 
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			function scrollto(div)
+{
+ $('html,body').animate(
+ {
+  scrollTop: $("#"+div).offset().top
+ },'slow');
+}	
+		</script>
+			  </head>
+<body>
+	<!--https://github.com/firebase/firebase-js-sdk/issues/998-->
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+	<script>
+	var firebaseConfig = {
+    apiKey: "AIzaSyAhTzPkUDYPkQCRxAhDAGR8BGIMuHMs9z4",
+    authDomain: "sympchecker-42e0e.firebaseapp.com",
+    databaseURL: "https://sympchecker-42e0e.firebaseio.com",
+    projectId: "sympchecker-42e0e",
+    storageBucket: "sympchecker-42e0e.appspot.com",
+    messagingSenderId: "182815287710",
+    appId: "1:182815287710:web:fcdcd7a744c223629b0e8f",
+    measurementId: "G-PNGPTWGDBK"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+	</script>
+	<div class = "sidenav">
+		<label style="font-size: 30px; margin-left: 10%; margin-top: 20px; color: white;">My Dashboard</label>
+		<div style="margin-top: 20px;">
+			<a href = "#" onclick = "scroolto('GeneralInfo');">General Information</a><br>
+			<a href = "#" onclick = "scrollto('ContactInfo');">Contact</a> <br>
+			<a href = "#" onclick = "scrollto('Address');">Address</a> <br>
+			<a href = "#" onclick = "scrollto('ChangePassword');">Change Password</a> <br>
+			<a href = "http://localhost:8080/Sympchecker/HomePage/index.html">Home</a> <br>
+		</div>
+	</div>
+	<button style = "margin-left: 30%; margin-top: 15px;" class = "btn btn-primary" data-toggle = "modal" data-target = "#UpdateModal">Update Profile</button>
+	<div class = "modal fade" id = "UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModal" aria-hidden="true">
+		<div class = "modal-dialog modal-lg" role = "document" style="width: 90%;">  
+			<div class = "modal-content">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+				<div class = "modal-header">
+					<h3>Update Profile</h3>  <!--Modal Header-->
+				</div>
+				<div class = "modal-body">
+					<div class = "input-group md-3">
+						<label class = "input-group-text" id=basic-addon1 style="font-size: 15px;">Username</label>
+						<input type ="text" class ="form-control" id = "DisplayUsername" aria-label="UserName" aria-describedby="basic-addon1" style="margin-left: 30%; margin-top: -30px;"><br>
+					</div>
+					<div class = "input-group md-3" style="margin-left: 32%; margin-top: -30px;">
+						<label class = "input-group-text" id=basic-addon2 style="font-size: 15px;">Age</label>
+						<input type ="text" class ="form-control" id = "DisplayAge" aria-label="Age" aria-describedby="basic-addon2" style="margin-left: 20%; margin-top: -30px;"><br>
+					</div>
+					<div class = "input-group md-3" style="margin-left: 58%; margin-top: -30px;">
+						<label class = "input-group-text" id=basic-addon3 style="font-size: 15px;">Phone Number</label>
+						<input type ="text" class ="form-control" id = "DisplayPhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon3" style="margin-left: 40%; margin-top: -30px;"><br>
+					</div>
+					<div class = "input-group md-3" style="margin-top: 35px;">
+						<label class = "input-group-text" id=basic-addon4 style="font-size: 15px;">Address</label><br>
+						<input type ="text" class ="form-control" id = "DisplayAddress" aria-label="Address" aria-describedby="basic-addon4" style="margin-left: 41%; margin-top: -30px; width: 293%;" rows="3"><br>
+					</div>
+					<div class = "input-group md-4" style="margin-top: -45px; margin-left: 58%;">
+						<label class = "input-group-text" id=basic-addon5 style="font-size: 15px;">Blood Group</label>
+						<div style = "margin-top: -27%;">
+							<select name="Blood" id="BloodGroup" style="margin-left: 133%;">
+								<option value="A+">A+</option>
+								<option value="B+">B+</option>
+								<option value="O+">O+</option>
+								<option value="AB+">AB+</option>
+								<option value="A+">A-</option>
+								<option value="B+">B-</option>
+								<option value="O+">O-</option>
+								<option value="AB+">AB-</option>
+							  </select>
+						</div>
+						<br><br>
+				</div>
+				<div class = "input-group md-5">
+					<label  class = "input-group-text" id=basic-addon4 style="font-size: 15px;">City</label>	
+				</div>
+				<div style = "margin-top: -2.5%;">
+					<input type = "text" class = "form-control" id = "DisplayCity" aria-labrl = "City" aria-describedby="bacic-addon6" style = "width : 15%; margin-left: 6.8%;">
+				</div>
+			</div>
+				<!-- State Display Below-->
+				<div class = "input-group md-6" style = "margin-left: 25%; margin-top: -3.6%;">
+					<label  class = "input-group-text" id=basic-addon5 style="font-size: 15px;">State</label>	
+				</div>
+				<div style = "margin-top: -2.5%;">
+					<input type = "text" class = "form-control" id = "DisplayState" aria-labrl = "City" aria-describedby="bacic-addon7" style = "width : 15%; margin-left: 30%;">
+				</div>
+				<div class = "input-group md-6" style = "margin-left: 48%; margin-top: -2.5%;">
+					<label  class = "input-group-text" id=basic-addon6 style="font-size: 15px;">Pin Code</label>	
+				</div>
+				<div style = "margin-top: -2.5%;">
+					<input type = "text" class = "form-control" id = "DisplayPinCode" aria-labrl = "City" aria-describedby="bacic-addon6" style = "width : 15%; margin-left: 55%;">
+				</div>
+				
+				<br><br>
+				<div class = "modal-footer">
+					<button class = "btn btn-success">Save Changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--1. General Info-->
+		<div class = "card bg-primary" id = "GeneralInfo">
+		<div class = "container" style="margin-left: 30%; margin-top: 12%; width: 40%; height: 390px;">
+			<h3 style="font-size: 30px; margin-left: -75%;">General Information</h3	>
+			<div style = "margin-left: -75%;">
+				<label>Name : </label><div class = "well" id = "UserName" style = "color: black;"></div>
+				<h3>Age : </h3><label id = "DisplayAge"></label><br>
+				<h3>Gender :</h3><label id = "UserGender"></label><br>
+				<h3>Phone Number</h3><p id = "PhoneNumber"></p>
+			</div>
+		</div>
+	</div>
+	<!--ContatInfo Submenu-->
+	<div class = "card bg-primary" id = "ContactInfo">
+		<div class = "container card-heading" style="margin-left: 30%; margin-top: 12%; width: 40%; height: 390px;">
+			<p>Contact Info</p>
+			<div>
+				<label>Current Logged in as (Will be displayed on Home Page)</label>
+				<h2 id = "WelcomeUser"></h2>
+				<div class = "main_list" id = "View">
+					<label>Displaying the User Information</label>
+					<p id = "">
+					<!-- The User Information is going to be displayed here-->	
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--2. Address SubMenu-->
+	<div id = "Address" style="margin-top: 8%;">
+		<div class = "card bg-primary" style="height : 390px;">
+			<h3 class="card-title">Address Information</h3>
+			<label class = "card-text">Address Will be displayed Here</label>
+		</div>
+	</div>
+	<!--3. Change Password-->
+	<div id = "ChangePassword" style="margin-bottom: 5%; margin-top: 200px;">
+		<div class = "card bg-primary" style="height : 200px;">
+			<div style="margin-left: 32%;">
+				<h3>Forgot Password</h3>
+				<p style="margin-left: -3%;">You can Reset your Password here.</p>
+			</div>
+			<input type="text" placeholder="Enter Your Registered Email Id" style="width: 40%; margin-left: 25%; color: black;" id = "ResetPass"><br>
+			<button type="button" class = "btn btn-success" value="Change Password" style="margin-left: 35%;" onclick="ForgotPassword()">Change Password</button>
+		</div>
+		
+	</div>
+
+	<!--Signout Function in UserProfile.js File-->
+	<!-- All Javascript Code is in UserProfile.js-->
+	<script src = "UserProfile.js"></script>
+</body>
+</html>
+
+
+<!-- 
+To Do : 
+	Create a Profile section where user can have a look on his information provided at the time of registration
+	and also the user should be able to update the information.
+	After clicking the Profile tab on "Home" Page the user will be redirected to the Profile Section.
+	The Profile Section should contain a sidebar at the left side of the Website with the following fields :
+		1. Sign-out (LOGOUT)
+		2. Contact Info (Contact No.)
+		3. Address (Local Address)
+		4. General Info (Name, Age, Gender, Email id)
+	If the user clicks on any of the above sub-menu's the user will be able to see the detailed information on the
+	remaining part (Middle/right) of the Website with a Button with it's value as Update.
+	a. If the user want's to update the information the user can simply click on the Update Button and then 
+		a Form will be displayed here the user can Update/ Insert the Information.
+Progress :
+	a. Added the SideNav.
+	b. Added the functionality for SignOut.
+
+Issues : 
+	a. Sign-out Function is not working. (Solved)
+	-> The Script was placed incorrectly and hence resulted in JavaScript Error.
+-->
